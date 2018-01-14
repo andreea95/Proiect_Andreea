@@ -1,0 +1,122 @@
+
+
+<head>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+<h1>	Contactele mele</h1>
+
+<center>
+ <button id ="butonAdd" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Adăugare contact nou</button>
+
+<div>
+	<div>
+	<center>
+		
+		<table class="table table-hover">
+			<thead>
+				<th> <h3> Nume </h3> </th>
+				<th> <h3> Prenume </h3> </th>
+				<th> <h3> E-mail </h3> </th>
+				<th> <h3> Telefon </h3> </th>
+				<th> <h3> Modificări </h3> </th>
+				</br>
+		
+			</thead>
+			<tr ng-repeat="person in people" ng-include="getTemplate(person)">
+			
+				<script type="text/ng-template" id="display">
+					<td>{{person.nume}}</td>
+					<td>{{person.prenume}}</td>
+					<td>{{person.email}}</td>
+					<td>{{person.telefon}}</td>
+					
+					<td colspan="5">
+					
+						<input id="btn" type="button" class="btn btn-success" value="   Șterge   " ng-click="deletePerson(person)">
+						<input id="btn" type="button" class="btn btn-warning" value="   Editează   " ng-click="editPerson(person)">
+						<a id="detaliiPersoana" ui-sref="detaliiPersoana({personId : person.id})"> <button type="button" class="btn btn-info">More info</button></a>
+					</td>	
+				</script>
+				
+				<script type="text/ng-template" id="edit">
+					<td><input type="text" ng-model="person.nume"></td>
+					<td><input type="text" ng-model="person.prenume"></td>
+					<td><input type="text" ng-model="person.email"></td>
+					<td><input type="text" ng-model="person.telefon"></td>
+
+					<td colspan="5">
+						<input type="button"  class="btn btn-success" value="   Salvează   " ng-click="savePerson(person)">
+					</td>	
+				</script>
+				
+			</tr>
+		</table>
+		</center>
+		
+		
+</div>
+</center>
+
+
+<div class="container">
+  
+ 
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <div class="container">
+		<form name="addPersonForm">
+	       <b> Nume: </b> <input type="text" name="nume" ng-model="person.nume" ng-required="true" ng-minlength="2"><br />
+	         <div ng-messages="addPersonForm.nume.$error" ng-if="addPersonForm.nume.$dirty" style="color:tomato">
+	         	
+	    				<div ng-message="required"> Acest camp nu poate fi gol! </div>
+	    				<div ng-message="minlength"> Min 2 caractere </div>
+	    	</div>
+	    	
+	        <b> Prenume: </b><input type="text" name="prenume" ng-model="person.prenume" ng-required="true" ng-minlength="2"><br />
+	        <div ng-messages="addPersonForm.prenume.$error" ng-if="addPersonForm.prenume.$dirty" style="color:tomato">
+	        	
+	    				<div ng-message="required"> Acest camp nu poate fi gol! </div>
+	    				<div ng-message="minlength"> Min 2 caractere </div>
+	    	</div>
+	    	
+	        <b> E-mail: </b> <input type="email" name="email" ng-model="person.email" ng-required="true" ng-minlength="5"><br />
+	        <div ng-messages="addPersonForm.email.$error" ng-if="addPersonForm.email.$dirty" style="color:tomato">
+	        	
+	        			<div ng-message="email"> E-mail-ul introdus nu este corect scris! </div>
+	    				<div ng-message="required"> Acest camp nu poate fi gol! </div>
+	    				<div ng-message="minlength"> Min 5 caractere </div>
+	    	</div>
+	    	
+	        <b>    Telefon:</b><input type="text" name="telefon" ng-model="person.telefon" ng-required="true" ng-minlength="7"><br />
+	        <div ng-messages="addPersonForm.telefon.$error" ng-if="addPersonForm.telefon.$dirty" style="color:tomato">
+	        	
+	    				<div ng-message="required"> Acest camp nu poate fi gol! </div>
+	    				<div ng-message="minlength"> Min 7 caractere </div>
+	    	</div>
+	        
+	       </br> <input id="btn" type="button" value="   Adaugă " class="btn btn-warning" data-dismiss="modal" ng-disabled="addPersonForm.$invalid" ng-click="addPerson(person)">
+		</form>
+	</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>

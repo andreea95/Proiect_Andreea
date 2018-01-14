@@ -1,0 +1,128 @@
+
+<head>
+	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<center>
+<div>
+	<!-- Trigger the modal with a button -->
+  <div>
+		<br>
+		
+			<div id="header_detalii_persoane">
+				<div> Nume: <b>{{person.nume}} </b></div>
+				<div> Prenume: <b> {{person.prenume}} </b></div>
+				<div> Posta electronica: <b> {{person.email}} </b></div>
+				<div> Telefon: <b> {{person.telefon}} </b></div>
+				</br>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Adăugare informații</button>
+	  <a ui-sref="persoane"> <button type="button" class="btn btn-danger">  Înapoi la agendă </button> </a>
+				
+			</div>
+		
+		<br>
+		<hr>
+			
+			
+	<table class="table table-hover">
+				<thead >
+					<th> Telefon secundar </th>
+					<th> Notițe </th>
+					
+				</thead>
+				
+				<tr ng-repeat="fiecareContact in person.contact_info2" ng-include="getTemplate(fiecareContact)">
+					<script type="text/ng-template" id="display">
+						<td>{{fiecareContact.telefon_secundar}} </td>
+						<td>{{fiecareContact.notite}}</td>
+					<td colspan="3"> 	<input id="btn" type="button" class="btn btn-warning" value="   Șterge   " ng-click="deleteContact(fiecareContact)">
+							<input id="btn "type="button" class="btn btn-success" value="   Editează   " ng-click="editContact(fiecareContact)"> </td>
+						
+							
+					
+					</script>
+					<script type="text/ng-template" id="edit">
+						<td><input type="text" ng-model="fiecareContact.telefon_secundar"></td>
+						<td><input type="text" ng-model="fiecareContact.notite"></td>
+						<td colspan="3">
+							<input type="button"  class="btn btn-primary" value="   Salvează   " ng-click="saveContact(fiecareContact)">
+					</td>
+					</script>
+				</tr>
+			</table>
+			
+			</br>
+			
+			
+			<div class="container">
+  
+  
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+         
+        </div>
+        <div class="modal-body">
+         
+				<form name="addOperaForm">
+					
+		        <b> telefon_secundar: </b>	 <input type="text" name="telefon_secundar" ng-model="fiecareContact.telefon_secundar" ng-required="true" ng-minlength="10" ng-maxlength="13"><br />
+		        	<div ng-messages="addOperaForm.telefon_secundar.$error" ng-if="addOperaForm.telefon_secundar.$dirty" style="color:tomato">
+		        		
+	    				<div ng-message="required"> Acest camp nu poate fi gol! </div>
+	    				<div ng-message="minlength"> Min 10 caractere! </div>
+	    				<div ng-message="maxlength"> Ai depasit numarul maxim de caractere </div>
+	    				
+	    			</div>
+	    			
+		        <b>	notite: </b><input type="text" name="notite" ng-model="fiecareContact.notite" ng-required="true" ng-minlength="5" ><br />
+		        	<div ng-messages="addOperaForm.notite.$error" ng-if="addOperaForm.notite.$dirty" style="color:tomato">
+		        		
+	    				<div ng-message="required"> Acest camp nu poate fi gol! </div>
+	    				<div ng-message="minlength"> Min 5 caractere! </div>
+	    				
+	    			</div>
+		        	
+		        	
+		     
+		        
+		        	
+		        <input id="btn" type="button" class="btn btn-warning" value="   Adauga   " ng-click="addContact(fiecareContact)" data-dismiss="modal">
+		      	</form>
+		     
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+			
+			</div>
+          
+	</div>
+	
+</div>
+</center>
+</body>
+
+<style type="text/css">
+	body { background-image:url("img/agenda2.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+</style>
