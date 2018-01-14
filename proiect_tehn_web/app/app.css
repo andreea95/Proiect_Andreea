@@ -1,13 +1,4 @@
-/*table, td, th {*/
-/*   border: 3px solid black;*/
-/*   border-collapse: collapse;*/
-/*   margin-left:0px;*/
-/*   margin-top:25px;*/
-/*   text-align:center;*/
-/*   padding:10px;*/
-/*}*/
 
-/*#btn { font-weight:bold; }*/
 
 td{ color: black;
   
@@ -21,15 +12,7 @@ body { background-image:url("img/agenda.jpg");
 th{color: black;
   
     font-size: 22px;}
-/*#detaliiArtist { text-decoration: none; }*/
 
-/*.container {*/
-/*        width: 500px;*/
-/*        clear: both;*/
-/*        margin-top:25px;*/
-/*        margin-left:0px;*/
-/*        margin-bottom:25px;*/
-/*}*/
     
 .container input[type=text], input[type=number], input[type=email] {
         width: 100px;
@@ -39,12 +22,6 @@ th{color: black;
 }
 
 
-/*table{ */
-   /*margin-left: 10px;*/
-   /*margin-right: 30px;*/
-   
-  
-/*}*/
 
 #butonAdd{ margin-left: 80%;
     size: : 150px;

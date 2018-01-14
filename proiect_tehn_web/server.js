@@ -5,14 +5,13 @@ var	Sequelize = require('sequelize')
 
 var app = express()
 
-app.use(express.static(__dirname + '/app')) //creaza un server Express
-app.use(cors())//Cross-origin resource sharing (CORS) 
-// CORS- e un mecanism care permite resurselor restrctionate dintr-o pag web sa fie cerute de un domeniu din afara domeniului pe provenieta al resurselor
+app.use(express.static(__dirname + '/app')) 
+app.use(cors()) 
+
 app.use(bodyParser.json())
 
 var	sequelize = new Sequelize('nodespa', 'root', '', { dialect : 'mysql', port : 3306}) 
-//sequelize e un ORM(Object-relational mapping) pt node.js si io.js. Suporta Mysql, SQLLite etc.
-//ORM- creaza  "virtual object database"
+
 var Persoana = sequelize.define('persons', {
 	
 	nume : {
@@ -58,10 +57,10 @@ var Contact = sequelize.define('contacts',{
 	
 })
 
-Persoana.hasMany(Contact, {foreignKey : 'persoanaId'} ) // a...
+Persoana.hasMany(Contact, {foreignKey : 'persoanaId'} ) 
 Contact.belongsTo(Persoana, {foreignKey : 'persoanaId'} )
 
-app.get('/create', function(req, res){                  //----------creare entitati------------
+app.get('/create', function(req, res){                  
 	sequelize
 		.sync({ force: true })
 		.then(function(){ res.status(201).send('created') })
