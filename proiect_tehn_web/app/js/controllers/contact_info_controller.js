@@ -23,8 +23,8 @@ app.controller('detaliiPersoanaController', function($scope, $http, $state, $sta
 		})			  
 	}
 		
-	$scope.addContact = function(opera_arta){
-		$http.post(SERVER + '/persoane/' + $stateParams.personId + '/contact_info', opera_arta)
+	$scope.addContact = function(contact2){
+		$http.post(SERVER + '/persoane/' + $stateParams.personId + '/contact_info', contact2)
 			.then(function(response) { $state.go($state.current, {}, {reload: true}) })
 			.catch(function(response) {
 				console.log(response)
@@ -32,8 +32,8 @@ app.controller('detaliiPersoanaController', function($scope, $http, $state, $sta
 			})		
 	}
 
-    $scope.deleteContact = function(opera_arta) {
-		$http.delete(SERVER + '/persoane/' +  $stateParams.personId + '/contact_info/' + opera_arta.id)
+    $scope.deleteContact = function(contact2) {
+		$http.delete(SERVER + '/persoane/' +  $stateParams.personId + '/contact_info/' + contact2.id)
 			.then(function(response) { $state.go($state.current, {}, { reload: true }) })
 			.catch(function(response) {
 				console.log(response)
@@ -43,19 +43,19 @@ app.controller('detaliiPersoanaController', function($scope, $http, $state, $sta
 		
 	$scope.selected = {}
 	
-	$scope.getTemplate = function(opera_arta) {
-		if (opera_arta.id === $scope.selected.id) { return 'edit' }  
+	$scope.getTemplate = function(contact2) {
+		if (contact2.id === $scope.selected.id) { return 'edit' }  
 			else { return 'display' }
 	}
 		
-	$scope.editContact = function(opera_arta) {
-	    $scope.selected = angular.copy(opera_arta)
+	$scope.editContact = function(contact2) {
+	    $scope.selected = angular.copy(contact2)
 	}
 	
-	 $scope.saveContact = function(opera_arta) {
+	 $scope.saveContact = function(contact2) {
 	 	console.log('sending')
-	 	console.log(opera_arta)
-			$http.put(SERVER + '/persoane/' +  $stateParams.personId + '/contact_info/' + opera_arta.id, opera_arta)
+	 	console.log(contact2)
+			$http.put(SERVER + '/persoane/' +  $stateParams.personId + '/contact_info/' + contact2.id, contact2)
 				.then(function(response) {     
 					$state.go($state.current, {}, { reload: true })
 				})
